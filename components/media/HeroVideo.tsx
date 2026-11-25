@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useMotionDisabled } from "@/components/AccessibilityPanel/AccessibilityContext";
 
 interface HeroVideoProps {
   src: string;
@@ -12,13 +11,12 @@ interface HeroVideoProps {
 
 export default function HeroVideo({ src, poster, label }: HeroVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const motionOff = useMotionDisabled();
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || failed || motionOff) return;
+    if (!video || failed) return;
 
     const tryPlay = async () => {
       try {
@@ -31,13 +29,7 @@ export default function HeroVideo({ src, poster, label }: HeroVideoProps) {
     };
 
     if (ready) void tryPlay();
-  }, [ready, failed, motionOff]);
-
-  useEffect(() => {
-    if (motionOff && videoRef.current) {
-      videoRef.current.pause();
-    }
-  }, [motionOff]);
+  }, [ready, failed]);
 
   return (
     <div className="relative mx-auto w-full max-w-[620px]">
