@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useMotionDisabled } from "@/components/AccessibilityPanel/AccessibilityContext";
-import { LineIcon } from "@/components/ui/Icons";
 
 interface HeroVideoProps {
   src: string;
@@ -14,7 +13,6 @@ interface HeroVideoProps {
 export default function HeroVideo({ src, poster, label }: HeroVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const motionOff = useMotionDisabled();
-  const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
 
@@ -26,9 +24,9 @@ export default function HeroVideo({ src, poster, label }: HeroVideoProps) {
       try {
         video.muted = true;
         await video.play();
-        setPlaying(true);
       } catch {
-        setPlaying(false);
+        // Autoplay may be blocked by a browser policy. The muted video will
+        // still retry through its native autoplay behavior when possible.
       }
     };
 
@@ -38,25 +36,8 @@ export default function HeroVideo({ src, poster, label }: HeroVideoProps) {
   useEffect(() => {
     if (motionOff && videoRef.current) {
       videoRef.current.pause();
-      setPlaying(false);
     }
   }, [motionOff]);
-
-  const toggle = async () => {
-    const video = videoRef.current;
-    if (!video || failed) return;
-    if (video.paused) {
-      try {
-        await video.play();
-        setPlaying(true);
-      } catch {
-        setPlaying(false);
-      }
-    } else {
-      video.pause();
-      setPlaying(false);
-    }
-  };
 
   return (
     <div className="relative mx-auto w-full max-w-[620px]">
@@ -92,25 +73,6 @@ export default function HeroVideo({ src, poster, label }: HeroVideoProps) {
           />
         )}
 
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/45 to-transparent p-4">
-          <button
-            type="button"
-            onClick={toggle}
-            disabled={failed || motionOff}
-            className="inline-flex items-center gap-2 rounded-full bg-frost/90 px-3.5 py-2 text-sm font-semibold text-ink shadow-soft backdrop-blur disabled:opacity-60"
-            aria-pressed={playing}
-            aria-label={playing ? "Pause video" : "Play video"}
-          >
-            <LineIcon name={playing ? "pause" : "play"} className="h-5 w-5 text-teal" />
-            {failed
-              ? "Preview image"
-              : motionOff
-                ? "Motion paused"
-                : playing
-                  ? "Pause"
-                  : "Play"}
-          </button>
-        </div>
       </div>
     </div>
   );
