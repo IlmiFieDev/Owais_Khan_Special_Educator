@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SITE_CONTENT } from "@/lib/content";
 
 const roles = [
-  ["Present", "Enable 361", "Special Educator — role details to be confirmed."],
+  ["Present", "Enable Therapeutic Centre", "Special Educator — role details to be confirmed."],
   ["2016–2018", "The Manthan School", "Individual and group sessions with therapist and parent collaboration."],
   ["2014–2016", "Rhythm Play School", "Early intervention, teaching aids and inclusion."],
   ["2013–2014", "FSMHP Udaan (J.R.C.)", "Intellectual Disability, IEP delivery and documentation."],

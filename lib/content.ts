@@ -321,7 +321,7 @@ export const SITE_CONTENT = {
       {
         id: "enable-361",
         years: "Present",
-        organisation: "Enable 361",
+        organisation: "Enable Therapeutic Centre",
         role: "Special Educator",
         focus:
           "Supporting learners through structured special education practice in a contemporary educational setting.",

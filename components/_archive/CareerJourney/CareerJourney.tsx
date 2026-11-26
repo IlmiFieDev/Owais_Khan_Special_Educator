@@ -7,7 +7,7 @@ const roles = [
   ["2013–2014", "FSMHP Udaan (J.R.C.)", "Intellectual Disability, IEP delivery and documentation."],
   ["2014–2016", "Rhythm Play School", "Early intervention, teaching aids and inclusion."],
   ["2016–2018", "The Manthan School", "Individual and group sessions with therapist and parent collaboration."],
-  ["Present", "Enable 361", "Special Educator — role details to be confirmed."],
+  ["Present", "Enable Therapeutic Centre", "Special Educator — role details to be confirmed."],
 ] as const;
 const alongside = [["2014–2018", "Adhaar Clinic, Noida", "Assessments, parent training, and speech and OT collaboration."], ["After 2018–present", "Independent practice, Delhi NCR", "One-to-one, session-based tuitions."]] as const;
 
